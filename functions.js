@@ -4,9 +4,14 @@
  * - logs "Hello" if there is no name
  * - logs "Hello <name>" if there is a name
  */
-function greet(name) {
-  // Your code here
+function greet(name = "Hello") {
+  if (name === "Hello") {
+    console.log(name);
+  } else {
+    console.log(`Hello ${name}`);
+  }
 }
+console.log(greet("Hello"));
 
 /**
  * isOdd(n):
@@ -14,8 +19,13 @@ function greet(name) {
  * - returns true if it's odd, false otherwise
  */
 function isOdd(n) {
-  // Your code here
+  if (n % 2 === 0) {
+    return false;
+  } else {
+    return true;
+  }
 }
+console.log(isOdd(5));
 
 /**
  * oddsSmallerThan(n):
@@ -29,9 +39,9 @@ function isOdd(n) {
  * Hint: you can solve this without writing any loops!
  */
 function oddsSmallerThan(n) {
-  // Your code here
+  return Math.trunc(n / 2);
 }
-
+console.log(oddsSmallerThan(7));
 /**
  * squareOrDouble(n):
  * - receives a number n
@@ -43,9 +53,13 @@ function oddsSmallerThan(n) {
  * squareOrDouble(9) -> 81
  */
 function squareOrDouble(n) {
-  // Your code here
+  if (n % 2 === 0) {
+    return n * 2;
+  } else {
+    return Math.pow(n, 2);
+  }
 }
-
+console.log(squareOrDouble(16));
 /**
  * ageFromCivilID(civilID):
  * - receives a civilID as a STRING of the form <CYYMMDDXXXXX>
@@ -65,9 +79,28 @@ function squareOrDouble(n) {
  *    ageFromCivilID(297111012345) -> 20
  */
 function ageFromCivilID(civilID) {
-  // Your code here
-}
+  let century = civilID.toString().substr(0, 1);
+  // let month = civilID.toString().substr(3, 4);
+  // let day = civilID.toString().substr(5, 6);
+  let year = civilID.toString().substr(1, 2);
 
+  if (century === "1") {
+    year = "18" + year;
+  } else if (century === "2") {
+    year = "19" + year;
+    console.log("year if :" + year);
+  } else if (century === "3") {
+    year = "20" + year;
+  }
+  // year = parseInt(year, 10);
+  let date = new Date();
+  date.setFullYear(year);
+  console.log("date:" + date);
+
+  let today = new Date();
+  return today.getFullYear() - date.getFullYear();
+}
+console.log(ageFromCivilID(297111012345));
 /**
  * canVoteInKuwait(civilID, isKuwaiti, isRoyal):
  * - receives a civilID as a STRING
@@ -80,9 +113,14 @@ function ageFromCivilID(civilID) {
  *    - Is NOT a member of the royal family
  */
 function canVoteInKuwait(civilID, isKuwaiti, isRoyal) {
-  // Your code here
+  var age = ageFromCivilID(civilID);
+  if (age >= 21 && isKuwaiti && isRoyal) {
+    return true;
+  } else {
+    return false;
+  }
 }
-
+console.log(canVoteInKuwait(287050612345, true, true));
 module.exports = {
   greet,
   isOdd,
